@@ -1,0 +1,59 @@
+#%RAML 1.0
+title: creditCardAPI1
+version: v1
+types:
+  Card:
+    type: object
+    properties:
+      Card-Number:
+        required: true
+        minLength: 16
+        maxLength: 19
+        pattern: '[1-9]{4}[- ]?[0-9]{4}[- ]?[0-9]{4}[- ]?[0-9]{4}'
+        example: '7485965896320145'
+        type: string
+      Expiry-Date:
+        required: true
+        example: '2018-04-03'
+        type: date-only
+      Name-on-Card:
+        required: true
+        example: Sakshi
+        type: string
+      Service-Provider:
+        required: true
+        example: visa
+        type: string
+/account/getCardList:
+  get:
+    responses:
+      '200':
+        body:
+          application/json:
+            uniqueItems: false
+            type: array
+            items:
+              required: false
+              type: Card
+      '404':
+        description: details not found
+    queryParameters:
+      CreitCardNumber:
+        minLength: 16
+        maxLength: 19
+        pattern: '[1-9]{4}[- ]?[0-9]{4}[- ]?[0-9]{4}[- ]?[0-9]{4}'
+        example: '4563210214569875'
+        description: card number is required.
+        type: string
+'/{accountNumber}/getCardList':
+  get:
+    responses:
+      '200':
+        body:
+          application/json:
+            type: array
+            items:
+              required: false
+              type: Card
+      '404':
+        description: Details not found
