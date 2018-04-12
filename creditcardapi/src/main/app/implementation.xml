@@ -10,7 +10,7 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
     <flow name="getDetailsbyCreditCard">
         <http:request config-ref="HttpRequestConfigDomain" path="/getCard" method="GET" doc:name="HTTP">
             <http:request-builder>
-                <http:query-param paramName="creditcardnumber" value="#[message.inboundProperties.'http.query.params'.CreitCardNumber]"/>
+                <http:query-param paramName="creditcardnumber" value="#[message.inboundProperties.'http.query.params'.creditcardnumber]"/>
             </http:request-builder>
         </http:request>
         <byte-array-to-string-transformer doc:name="Byte Array to String"/>
